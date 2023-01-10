@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
+import { flexbox } from "@mui/system";
 
 const Header = styled.div`
 border-style: solid;
@@ -30,11 +32,27 @@ align-items: baseline;
 
 
 const Top = () => {
+
+    const { loginWithRedirect, logout,  user, isAuthenticated, isLoading  } = useAuth0();
+
+    if (isLoading) {
+        return <div>Loading ...</div>;
+      }
+
+
     return ( 
         <Header>
             <HNav>
-            <Logo to="/home" className="fa-solid fa-g"></Logo>
-            <h1>(  ProgressBar  )</h1>
+            {!isAuthenticated && (
+                <Logo onClick={() => loginWithRedirect()}>Log In</Logo>
+            )}
+            {isAuthenticated && (
+            <>
+            <Logo to="/home" className="fa-solid fa-g" style={{backgorundImage: `url(${user.picture})`}}></Logo>
+            <h1>  {user.name}'s ProgressBar </h1>
+            <img src={user.picture} alt="image" style={{height: `3em`}} />
+            </>
+            )}
             </HNav>
         </Header>
      );

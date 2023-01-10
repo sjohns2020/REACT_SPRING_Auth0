@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Footer = styled.div`
 border-style: solid;
@@ -32,12 +33,26 @@ align-items: baseline;
 `
 
 const Bottom = () => {
+
+    const { loginWithRedirect, logout,  user, isAuthenticated, isLoading  } = useAuth0();
+
+    if (isLoading) {
+        return <div>Loading ...</div>;
+      }
+
     return ( 
         <Footer>
             <FNav>
-                <Logo to="/" className=" fa-solid fa-regular fa-users "></Logo>
+            {!isAuthenticated && (
+            <h1>Happiness is being Gratefull</h1>
+            )}
+                { isAuthenticated && (
+                <>
                 <Logo to="/" className=" fa-solid fa-duotone fa-user "></Logo>
                 <Logo to="/" className=" fa-sharp fa-solid fa-gear "></Logo>
+                <Logo onClick={() => logout({ returnTo: window.location.origin })}>Log Out</Logo>
+                </>
+                )}
            </FNav>
         </Footer>
      );

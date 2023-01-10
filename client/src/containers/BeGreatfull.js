@@ -8,6 +8,7 @@ import styled from "styled-components";
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FormProvider } from "../context/FormContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Main = styled.div`
 display: flex;
@@ -78,19 +79,32 @@ function BeGreatfull() {
     setBgs(bgs.filter(bg => bg._id !== BGtoDelete));
   })}
 
-    
+  const { loginWithRedirect, logout,  user, isAuthenticated, isLoading  } = useAuth0();
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
   return (
     <div className="app">
     <Router>
       <Top />
+      <>
       <Main>
         <Routes>
-            <Route exact path="/" element={<Landing />}/>
+            {!isAuthenticated && (
+            <Route exact path="/*" element={<Landing />}/>
+            )}
+            {isAuthenticated && (
+            <>
+            <Route exact path="/*" element={<Landing />}/>
             <Route exact path="/home" element={< Home />}/>
             <Route exact path="/form" element={<FormProvider>< Form addBg={addBg} /></FormProvider>}/>
+            </>
+            )}
         </Routes>
       </Main>
       <Bottom />
+      </>
     </Router>
     </div>
   );
