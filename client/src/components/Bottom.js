@@ -41,7 +41,7 @@ const Bottom = () => {
       }
 
     return ( 
-        <Footer>
+        <div className="footer">
             <FNav>
             {!isAuthenticated && (
             <h1>Happiness is being Gratefull</h1>
@@ -54,7 +54,7 @@ const Bottom = () => {
                 </>
                 )}
            </FNav>
-        </Footer>
+        </div>
      );
 }
  

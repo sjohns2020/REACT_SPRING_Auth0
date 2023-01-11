@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { flexbox } from "@mui/system";
 
 const Header = styled.div`
+grid-area: header_section;
 border-style: solid;
 position: fixed;
 top: 0;
@@ -41,7 +42,7 @@ const Top = () => {
 
 
     return ( 
-        <Header>
+        <div className="header">
             <HNav>
             {!isAuthenticated && (
                 <Logo onClick={() => loginWithRedirect()}>Log In</Logo>
@@ -54,7 +55,7 @@ const Top = () => {
             </>
             )}
             </HNav>
-        </Header>
+        </div>
      );
 }
  

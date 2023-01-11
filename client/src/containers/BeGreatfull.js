@@ -17,6 +17,9 @@ justify-content: center;
 align-items: center;
 width: 100vw;
 height: 100vh;
+padding-top: 75px;
+padding-botton: 75px;
+border: solid green;
 `
 
 function BeGreatfull() {
@@ -89,7 +92,7 @@ function BeGreatfull() {
     <Router>
       <Top />
       <>
-      <Main>
+      <div className="main-section">
         <Routes>
             {!isAuthenticated && (
             <Route exact path="/*" element={<Landing />}/>
@@ -102,7 +105,7 @@ function BeGreatfull() {
             </>
             )}
         </Routes>
-      </Main>
+      </div>
       <Bottom />
       </>
     </Router>
