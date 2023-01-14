@@ -42,7 +42,7 @@ const Top = () => {
 
 
     return ( 
-        <div className="header">
+        <div>
             <HNav>
             {!isAuthenticated && (
                 <Logo onClick={() => loginWithRedirect()}>Log In</Logo>

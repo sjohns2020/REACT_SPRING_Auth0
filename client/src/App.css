@@ -1,19 +1,20 @@
 
 body {
   border: solid red;
-  position: fixed;
+  /* position: fixed; */
   margin: 0;
-  min-height: 100%;
-  min-width: 100%;
+  height: 100vh;
+  /* width: 100%; */
   /* display: flex;
   flex-direction: row; */
   /* align-items: center;
   justify-content: center; */
   background-image: url('./static/blackboard.avif');
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   font-family: 'Finger Paint', cursive, 'Permanent Marker', cursive,  -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
+  color: white;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
@@ -23,24 +24,27 @@ body {
   /* text-align: center; */
   /* height: 100vh;
   width: 100%; */
-  align-items: center;
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
+  /* align-items: center; */
+  /* grid-template-areas:
   "header"
   "main"
-  "footer";
+  "footer"; */
   border: solid yellow;
-  min-height: 100vh;
-  min-width: 100%;
+  height: 100vh;
+  /* min-width: 100%; */
   /* background-image: url('./static/Blackb.jpg'); */
   /* height: 844px;
   width: 390px; */
   /* border: 1.334vh solid #111;
   border-radius: 4.5vh; */
-  z-index: 50;
+  /* z-index: 50; */
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
 }
 
 .header {
@@ -59,7 +63,7 @@ grid-area: footer;
 border-style: solid;
 /* position: fixed;
 bottom: 0;
-width: 100%; */
+width: 100%;  */
 /* height: 75px; */
 /* margin: 0 auto; */
 /* z-index: 50; */
@@ -68,13 +72,14 @@ width: 100%; */
 .main-section {
 grid-area: main;
 display: flex;
-overflow: auto;
+/* overflow: auto; */
 flex-direction: column;
 justify-content: center;
 align-items: center;
 /* width: 100vw;
-height: 100vh; */
+height: 100%; */
 border: solid green;
+
 }
 
 

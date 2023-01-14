@@ -42,7 +42,7 @@ padding-bottom: 2.5em;
 `
 
 
-const Form = ({addBg}) => {
+const Form = ({addPraise}) => {
 
     const{
         page,
@@ -65,7 +65,7 @@ const Form = ({addBg}) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        addBg(data)
+        addPraise(data)
         navigate('/home')
     }
 

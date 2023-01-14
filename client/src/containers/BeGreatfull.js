@@ -24,7 +24,6 @@ border: solid green;
 
 function BeGreatfull() {
 
-    const [bgs, setBgs] = useState( [] )
     const [praise, setPraise] = useState([])
 
     useEffect( () => {
@@ -34,52 +33,41 @@ function BeGreatfull() {
     }, []) 
 
 
-
-
-
-
-    useEffect( () => {
-        fetch('http://localhost:9000/api/bgs')
-            .then( res => res.json() )
-            .then( data => setBgs( data ) )
-    }, [] )
-
-
-  const addBg = (bg) => {
-    return fetch('http://localhost:9000/api/bgs', {
+  const addPraise = (praise) => {
+    return fetch('http://localhost:8080/praises', {
       method: 'POST',
-      body: JSON.stringify(bg),
+      body: JSON.stringify(praise),
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then(res => res.json())
-      .then(savedBg => setBgs([ ...bgs, savedBg ]));
+      .then(savedPraise => setPraise([ ...praise, savedPraise ]));
     }
 
-  const updateBG = (bg) => {
-    return fetch('http://localhost:9000/api/bgs' + bg._id, {
-      method: 'PUT',
-      body: JSON.stringify(bg),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(updatedBG => {
-      const updatedBgIndex = bgs.findIndex(bg => bg._id === updatedBG._id);
-      const updatedBgs = [...bgs];
-      updatedBgs[updatedBgIndex] = updatedBG;
-      setBgs(updatedBgs);
-      } )
-    }
+  // const updatePraise = (praise) => {
+  //   return fetch('http://localhost:8080/praises' + praise._id, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(praise),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //     .then(res => res.json())
+  //     .then(updatedPraise => {
+  //     const updatedPraiseIndex = praise.findIndex(praise => praise._id === updatedPraise._id);
+  //     const updatedPraise = [...praise];
+  //     updatedPraise[updatedPraiseIndex] = updatedPriase;
+  //     setBgs(updatedPraise);
+  //     } )
+  //   }
 
   const deleteBg = (id) => {
-    return fetch('http://localhost:9000/api/bgs' + id, {
+    return fetch('http://localhost:8080/praises' + id, {
       method: 'DELETE'
     })
-    .then(BGtoDelete => {
-    setBgs(bgs.filter(bg => bg._id !== BGtoDelete));
+    .then(PraiseToDelete => {
+    setPraise(praise.filter(praise => praise._id !== PraiseToDelete));
   })}
 
   const { loginWithRedirect, logout,  user, isAuthenticated, isLoading  } = useAuth0();
@@ -88,11 +76,11 @@ function BeGreatfull() {
   }
 
   return (
-    <div className="app">
     <Router>
+      <div  className="header">
       <Top />
-      <>
-      <div className="main-section">
+      </div>
+      <div className="main-section" >
         <Routes>
             {!isAuthenticated && (
             <Route exact path="/*" element={<Landing />}/>
@@ -101,15 +89,15 @@ function BeGreatfull() {
             <>
             <Route exact path="/*" element={<Landing />}/>
             <Route exact path="/home" element={< Home />}/>
-            <Route exact path="/form" element={<FormProvider>< Form addBg={addBg} /></FormProvider>}/>
+            <Route exact path="/form" element={<FormProvider>< Form addPraise={addPraise} /></FormProvider>}/>
             </>
             )}
         </Routes>
       </div>
+      <div className="footer">
       <Bottom />
-      </>
+      </div>
     </Router>
-    </div>
   );
 }
 
